@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mayday.mapper.BankCardMapper">
+    <parameterMap id="bankModel" type="com.mayday.model.BankCardModel">
+        <parameter property="cardId" jdbcType="INTEGER"/>
+        <parameter property="cardNumber" jdbcType="VARCHAR"/>
+        <parameter property="realName" jdbcType="VARCHAR"/>
+        <parameter property="bankName" jdbcType="VARCHAR"/>
+        <parameter property="balance" jdbcType="DOUBLE"/>
+   </parameterMap>
+
+    <!-- 查询银行卡余额  -->
+    <select id="getBalance" resultType="DOUBLE" parameterMap="bankModel">
+        SELECT BALANCE FROM BANKCARDINFO WHERE CARDNUMBER = #{bankModel.cardNumber}
+    </select>
+
+    <!-- 存款 -->
+    <update id="addBalance" parameterMap="bankModel" >
+          UPDATE BANKCARDINFO SET BALANCE=#{bankModel.balance} WHERE CARDNUMBER=#{bankModel.cardNumber}
+    </update>
+
+
+
+
+</mapper>
